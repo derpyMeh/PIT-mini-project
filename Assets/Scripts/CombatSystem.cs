@@ -63,6 +63,19 @@ public class CombatSystem : MonoBehaviour
             waveCount += 1;
     }
 
+    public void InitiateCombat()
+    {
+        StartCombat();
+    }
+
+    public bool GetCombatState
+    {
+        get
+        {
+            return combatInitiated;
+        }
+    }
+
     public int PlayerScore
     {
         get
