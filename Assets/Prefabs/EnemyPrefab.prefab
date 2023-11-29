@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 112877447570958346}
   - component: {fileID: 8892818901266974515}
   - component: {fileID: -5835858143695598505}
+  - component: {fileID: 3034512601295184455}
   m_Layer: 0
   m_Name: EnemyPrefab
   m_TagString: Untagged
@@ -200,5 +201,15 @@ MonoBehaviour:
     m_Bits: 55
   waypoints:
   - {fileID: 3606232915473166390, guid: a72dd78072da54c4f84538af9438f625, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+--- !u!114 &3034512601295184455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4258075563799237663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1715cb8d0dcfac34b930ce2061459806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

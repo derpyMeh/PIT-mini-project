@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyBehavior : MonoBehaviour
+public class AIBehavior : MonoBehaviour
 {
     [SerializeField] UnityEngine.AI.NavMeshAgent navMeshAgent;
     [Header("Enemy Modifiers")]
@@ -14,7 +14,8 @@ public class EnemyBehavior : MonoBehaviour
     public LayerMask playerMask;
     public LayerMask obstacleMask;
 
-    public Transform[] waypoints;
+    //public Transform[] waypoints;
+    [SerializeField] List<Transform> waypoints;
     int currentWayPointIndex;
 
     Vector3 playerLastNearbyPos = Vector3.zero;
@@ -130,7 +131,7 @@ public class EnemyBehavior : MonoBehaviour
 
     void NextPoint()
     {
-        currentWayPointIndex = (currentWayPointIndex +1) % waypoints.Length;
+        currentWayPointIndex = (currentWayPointIndex +1) % waypoints.Count;
         navMeshAgent.SetDestination(waypoints[currentWayPointIndex].transform.position);
     }
 

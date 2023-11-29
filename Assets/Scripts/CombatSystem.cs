@@ -18,7 +18,7 @@ public class CombatSystem : MonoBehaviour
     // kill counter basically
     private static int playerScore;
     private static int baseHP;
-    private static int playerHP;
+    private static bool playerAlive;
 
     private bool combatInitiated;
 
@@ -29,11 +29,18 @@ public class CombatSystem : MonoBehaviour
         waveCount = 0;
         playerScore = 0;
         baseHP = 100;
-        playerHP = 10;
+        playerAlive = true;
+        timeUntilSpawn = 0;
+        StartCombat();
     }
 
     void Update()
     {
+        if (!playerAlive)
+        {
+            // Game Over
+            combatInitiated = false;
+        }
         timeUntilSpawn -= Time.deltaTime;
         if (timeUntilSpawn <= 0 && combatInitiated)
         {
@@ -86,7 +93,7 @@ public class CombatSystem : MonoBehaviour
         }
         set
         {
-            playerScore = value;
+            playerScore += value;
         }
     }
 
@@ -98,19 +105,19 @@ public class CombatSystem : MonoBehaviour
         }
         set
         {
-            baseHP = value;
+            baseHP += value;
         }
     }
 
-    public int PlayerHP
+    public bool PlayerAlive
     {
         get
         {
-            return playerHP;
+            return playerAlive;
         }
         set
         {
-            playerHP = value;
+            playerAlive = value;
         }
     }
 }
