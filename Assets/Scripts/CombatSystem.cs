@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class CombatSystem : MonoBehaviour
 {
+    [Header("Add Prefabs Here")]
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] List<GameObject> enemySpawnPoints;
+    [Header("Respawn Parameters")]
     [SerializeField] float minimumWaveTime = 2;
     [SerializeField] float maximumWaveTime = 5;
-    [SerializeField] float spawnMultiplier = 1;
+    [SerializeField] int spawnMultiplier = 1;
 
     private float timeUntilSpawn;
     private int waveCount;

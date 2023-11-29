@@ -40,7 +40,7 @@ public class EnemyBehavior : MonoBehaviour
 
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = speedWalk;
-        navMeshAgent.SetDestination(waypoints[currentWayPointIndex].position); // Sets destination to first waypoint on game launch  
+        navMeshAgent.SetDestination(waypoints[currentWayPointIndex].transform.position); // Sets destination to first waypoint on game launch
     }
 
     
@@ -76,7 +76,7 @@ public class EnemyBehavior : MonoBehaviour
                 Move(speedWalk);
                 waitToRotate = timeToRotate;
                 waitDelay = startWaitTime;
-                navMeshAgent.SetDestination(waypoints[currentWayPointIndex].position);
+                navMeshAgent.SetDestination(waypoints[currentWayPointIndex].transform.position);
             }
             else
             {
@@ -110,7 +110,7 @@ public class EnemyBehavior : MonoBehaviour
         {
             playerNear = false;
             playerLastNearbyPos = Vector3.zero;
-            navMeshAgent.SetDestination(waypoints[currentWayPointIndex].position);
+            navMeshAgent.SetDestination(waypoints[currentWayPointIndex].transform.position);
             if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
                 if (waitDelay <= 0)
@@ -131,7 +131,7 @@ public class EnemyBehavior : MonoBehaviour
     void NextPoint()
     {
         currentWayPointIndex = (currentWayPointIndex +1) % waypoints.Length;
-        navMeshAgent.SetDestination(waypoints[currentWayPointIndex].position);
+        navMeshAgent.SetDestination(waypoints[currentWayPointIndex].transform.position);
     }
 
     void Stop()
@@ -160,7 +160,7 @@ public class EnemyBehavior : MonoBehaviour
             {
                 playerNear = false;
                 Move(speedWalk);
-                navMeshAgent.SetDestination(waypoints[currentWayPointIndex].position);
+                navMeshAgent.SetDestination(waypoints[currentWayPointIndex].transform.position);
                 waitDelay = startWaitTime;
                 waitToRotate = timeToRotate;
             }
