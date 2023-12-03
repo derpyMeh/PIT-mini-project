@@ -1,4 +1,3 @@
-// Recycled from Jacob Villumsen's P4 3D solo project
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,24 +5,21 @@ using UnityEngine.AI;
 
 public class AIBehavior : MonoBehaviour
 {
-    [SerializeField] UnityEngine.AI.NavMeshAgent navMeshAgent;
-    [Header("Enemy Modifiers")]
-    [SerializeField] float startWaitTime = 2;
-    [SerializeField] float timeToRotate = 2, speedWalk = 6, speedRun = 9, viewRadius = 15, viewAngle = 90;
-
-    public LayerMask playerMask;
-    public LayerMask obstacleMask;
-
+    [SerializeField] NavMeshAgent navMeshAgent;
+    [SerializeField] Animator orcWarriorAnimator;
+    [SerializeField] Transform destinationObject;
+    [SerializeField] float startWaitTime = 2, timeToRotate = 2, speedWalk = 6, speedRun = 9, viewRadius = 15, viewAngle = 90;
     [SerializeField] List<Transform> waypoints;
-    int currentWayPointIndex;
+    [SerializeField] LayerMask playerMask;
+    [SerializeField] LayerMask obstacleMask;
+    [SerializeField] int damageAmount = 1;
 
+    int currentWayPointIndex;
     Vector3 playerLastNearbyPos = Vector3.zero;
     Vector3 playerLastSeenPos;
 
     float waitDelay, waitToRotate;
     bool playerInRange, playerNear, isPatrolling, caughtPlayer;
-
-    [SerializeField] int damageAmount = 1; // Amount of damage the enemy does to the player
 
     void Start()
     {
@@ -35,17 +31,17 @@ public class AIBehavior : MonoBehaviour
         waitDelay = startWaitTime;
         waitToRotate = timeToRotate;
 
-        currentWayPointIndex = 0;                                               // (Re)sets to the first waypoint
+        currentWayPointIndex = 0;
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = speedWalk;
-        navMeshAgent.SetDestination(waypoints[currentWayPointIndex].transform.position); // Sets the destination to the first waypoint on game launch
+        navMeshAgent.SetDestination(waypoints[currentWayPointIndex].transform.position);
     }
 
     void Update()
     {
-        EnvironmentView(); // Checking for line of sight & range
+        EnvironmentView();
         if (!isPatrolling)
         {
             Chasing();
@@ -58,14 +54,15 @@ public class AIBehavior : MonoBehaviour
 
     void Chasing()
     {
-        playerNear = false;                 // Set to false, since the player has already been noticed
-        playerLastNearbyPos = Vector3.zero; // Resets the variable
+        playerNear = false;
+        playerLastNearbyPos = Vector3.zero;
 
         if (!caughtPlayer)
         {
             Move(speedRun);
-            navMeshAgent.SetDestination(playerLastSeenPos); // Sets destination to the player's location
+            navMeshAgent.SetDestination(playerLastSeenPos);
         }
+
         if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
             if (waitDelay <= 0 && !caughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f)
@@ -86,7 +83,6 @@ public class AIBehavior : MonoBehaviour
                 }
                 else
                 {
-                    // Damage the player and self-destruct when in range
                     DamagePlayer();
                 }
             }
@@ -95,9 +91,8 @@ public class AIBehavior : MonoBehaviour
 
     void Patrolling()
     {
-        if (playerNear) // If the player is nearby, wait for a bit and then move to the player's position
+        if (playerNear)
         {
-
             if (waitToRotate <= 0)
             {
                 Move(speedWalk);
@@ -105,7 +100,6 @@ public class AIBehavior : MonoBehaviour
             }
             else
             {
-
                 Stop();
                 waitToRotate -= Time.deltaTime;
             }
@@ -115,6 +109,7 @@ public class AIBehavior : MonoBehaviour
             playerNear = false;
             playerLastNearbyPos = Vector3.zero;
             navMeshAgent.SetDestination(waypoints[currentWayPointIndex].transform.position);
+
             if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
                 if (waitDelay <= 0)
@@ -137,14 +132,14 @@ public class AIBehavior : MonoBehaviour
         PlayerHealth playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
-            playerHealth.PlayerTakeDamage(damageAmount); // Damage the player using the PlayerHealth reference
-            SelfDestruct(); // Self-destruct after damaging the player
+            playerHealth.PlayerTakeDamage(damageAmount);
+            SelfDestruct();
         }
     }
 
-    void SelfDestruct()
+    public void SelfDestruct()
     {
-        Destroy(gameObject); // Self-destruct the enemy
+        Destroy(gameObject);
     }
 
     void NextPoint()
@@ -157,17 +152,20 @@ public class AIBehavior : MonoBehaviour
     {
         navMeshAgent.isStopped = true;
         navMeshAgent.speed = 0;
+        orcWarriorAnimator.SetTrigger("IdleTrigger");
     }
 
     void Move(float speed)
     {
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = speed;
+        orcWarriorAnimator.SetTrigger("RunTrigger");
     }
 
     void CaughtPlayer()
     {
         caughtPlayer = true;
+        orcWarriorAnimator.SetTrigger("AttackTrigger");
     }
 
     void LookingPlayer(Vector3 player)
@@ -193,12 +191,12 @@ public class AIBehavior : MonoBehaviour
 
     void EnvironmentView()
     {
-        Collider[] isPlayerInRange = Physics.OverlapSphere(transform.position, viewRadius, playerMask); // makes an OverLapSphere to detect the player while inside viewRadius area.
+        Collider[] isPlayerInRange = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
         for (int i = 0; i < isPlayerInRange.Length; i++)
         {
             Transform player = isPlayerInRange[i].transform;
             Vector3 directionToPlayer = (player.position - transform.position).normalized;
-            if (Vector3.Angle(transform.forward, directionToPlayer) < viewAngle / 2) // If player is within view range and angle, and not behind an obstacle, set playerInRange to true.
+            if (Vector3.Angle(transform.forward, directionToPlayer) < viewAngle / 2)
             {
                 float distanceToPlayer = Vector3.Distance(transform.position, player.position);
                 if (!Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, obstacleMask))
@@ -211,11 +209,11 @@ public class AIBehavior : MonoBehaviour
                     playerInRange = false;
                 }
             }
-            if (Vector3.Distance(transform.position, player.position) > viewRadius) // If the player is outside of viewRadius (range), set playerInRange to false.
+            if (Vector3.Distance(transform.position, player.position) > viewRadius)
             {
                 playerInRange = false;
             }
-            if (playerInRange) // Obtain the player's current position if in range
+            if (playerInRange)
             {
                 playerLastSeenPos = player.transform.position;
             }

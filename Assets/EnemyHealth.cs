@@ -5,21 +5,25 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int enemyHealth = 10;
-    int enemyHP;
+    int currentHealth;
+    bool isDead = false;
 
     void Awake()
     {
-        enemyHP = enemyHealth;
+        currentHealth = enemyHealth;
     }
-
-
 
     public void TakeDamage(int amount)
     {
-        enemyHP -= amount;
-        if (enemyHP <= 0)
+        if (!isDead) // Check if the enemy is not already dead
         {
-            Destroy(this);
+            currentHealth -= amount;
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                isDead = true;
+                GetComponent<AIBehavior>().SelfDestruct(); // Trigger death behavior in AIBehavior script
+            }
         }
     }
 }
