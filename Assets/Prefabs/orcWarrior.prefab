@@ -9,16 +9,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0d9f85bb567132142af920b85f29e713, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.808994
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0d9f85bb567132142af920b85f29e713, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.808994
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0d9f85bb567132142af920b85f29e713, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.808994
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0d9f85bb567132142af920b85f29e713, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.75
+      value: -13.747
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d9f85bb567132142af920b85f29e713, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.06
+      value: 5.2005
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d9f85bb567132142af920b85f29e713, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.85
+      value: -16.94
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d9f85bb567132142af920b85f29e713, type: 3}
       propertyPath: m_LocalRotation.w
@@ -78,7 +90,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d9f85bb567132142af920b85f29e713, type: 3}
       insertIndex: -1
       addedObject: {fileID: -4570871985933083509}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d9f85bb567132142af920b85f29e713, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2263805035816837477}
   m_SourcePrefab: {fileID: 100100000, guid: 0d9f85bb567132142af920b85f29e713, type: 3}
+--- !u!95 &1308297954040651713 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 0d9f85bb567132142af920b85f29e713, type: 3}
+  m_PrefabInstance: {fileID: 4846602893613474384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5729702936477114113 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d9f85bb567132142af920b85f29e713, type: 3}
@@ -211,22 +231,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 3188774182301642213}
-  orcWarriorAnimator: {fileID: 0}
-  destinationObject: {fileID: 0}
   startWaitTime: 2
   timeToRotate: 2
   speedWalk: 6
   speedRun: 9
   viewRadius: 15
   viewAngle: 90
-  waypoints:
-  - {fileID: 0}
   playerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
+  waypoints:
+  - {fileID: 6838498796530157461, guid: 508484882fa45d44ca4ebdf3b7027e2f, type: 3}
   damageAmount: 1
 --- !u!114 &-4570871985933083509
 MonoBehaviour:
@@ -241,3 +259,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 10
+--- !u!114 &-2263805035816837477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5729702936477114113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 263f88fb1df233c42aa8d527d2bdd53d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orcWarriorAnimator: {fileID: 1308297954040651713}
