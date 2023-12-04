@@ -8,7 +8,7 @@ public class AIBehavior : MonoBehaviour
 {
     [SerializeField] UnityEngine.AI.NavMeshAgent navMeshAgent;
     [Header("Enemy Modifiers")]
-    [SerializeField] float startWaitTime = 2;
+    [SerializeField] float startWaitTime = 3;
     [SerializeField] float timeToRotate = 2, speedWalk = 6, speedRun = 9, viewRadius = 15, viewAngle = 90;
 
     public LayerMask playerMask;
@@ -154,7 +154,7 @@ public class AIBehavior : MonoBehaviour
         navMeshAgent.SetDestination(waypoints[currentWayPointIndex].transform.position);
     }
 
-    void Stop()
+    public void Stop()
     {
         navMeshAgent.isStopped = true;
         navMeshAgent.speed = 0;
@@ -169,6 +169,8 @@ public class AIBehavior : MonoBehaviour
     void CaughtPlayer()
     {
         caughtPlayer = true;
+        Debug.Log("Calling DamagePlayer function now.");
+        DamagePlayer();
     }
 
     void LookingPlayer(Vector3 player)

@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: orcWarrior
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0d9f85bb567132142af920b85f29e713, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 0d9f85bb567132142af920b85f29e713, type: 3}
       propertyPath: m_Controller
       value: 
@@ -214,10 +218,10 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &8541120356323280135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,8 +237,8 @@ MonoBehaviour:
   navMeshAgent: {fileID: 3188774182301642213}
   startWaitTime: 2
   timeToRotate: 2
-  speedWalk: 6
-  speedRun: 9
+  speedWalk: 2
+  speedRun: 2
   viewRadius: 15
   viewAngle: 90
   playerMask:
@@ -259,6 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 10
+  gunDamage: 5
   orcWarriorAnimator: {fileID: 1308297954040651713}
 --- !u!114 &-2263805035816837477
 MonoBehaviour:

@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     {
         playerHP = playerHealth;
         HPStat.text = ("HP: " + playerHP);
+        Debug.Log("Player HP set to Default");
     }
 
 
