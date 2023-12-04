@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -24,6 +24,13 @@ public class EnemyHealth : MonoBehaviour
             {
                 currentHealth = 0;
                 isDead = true;
+
+                // Access the NavMeshAgent component and set its speed to 0
+                NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
+                if (navMeshAgent != null)
+                {
+                    navMeshAgent.speed = 0;
+                }
 
                 // Stop all currently active animations
                 orcWarriorAnimator.SetBool("IsMoving", false);

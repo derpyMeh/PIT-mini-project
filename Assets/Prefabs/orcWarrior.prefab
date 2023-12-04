@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 10
+  orcWarriorAnimator: {fileID: 1308297954040651713}
 --- !u!114 &-2263805035816837477
 MonoBehaviour:
   m_ObjectHideFlags: 0
