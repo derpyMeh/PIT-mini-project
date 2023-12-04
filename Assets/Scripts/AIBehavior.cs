@@ -143,7 +143,7 @@ public class AIBehavior : MonoBehaviour
         Debug.Log($"Player Damaged: Health: {playerHealth.PlayerHP}");
     }
 
-    void SelfDestruct()
+    public void SelfDestruct()
     {
         Destroy(gameObject); // Self-destruct the enemy
     }
