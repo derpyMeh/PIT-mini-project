@@ -21,6 +21,20 @@ public class PlayerHealth : MonoBehaviour
         {
             // Game Over
             combatSystem.PlayerAlive = false;
+            Debug.Log("Player Died");
+        }
+    }
+
+
+    public int PlayerHP
+    {
+        get
+        {
+            return playerHP;
+        }
+        set
+        {
+            playerHP = value;
         }
     }
 }

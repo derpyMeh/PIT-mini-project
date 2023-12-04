@@ -25,7 +25,7 @@ public class AIBehavior : MonoBehaviour
 
     [SerializeField] int damageAmount = 1; // Amount of damage the enemy does to the player
 
-    void Start()
+    void Awake()
     {
         playerLastSeenPos = Vector3.zero;
         isPatrolling = true;
@@ -140,6 +140,7 @@ public class AIBehavior : MonoBehaviour
             playerHealth.PlayerTakeDamage(damageAmount); // Damage the player using the PlayerHealth reference
             SelfDestruct(); // Self-destruct after damaging the player
         }
+        Debug.Log($"Player Damaged: Health: {playerHealth.PlayerHP}");
     }
 
     void SelfDestruct()

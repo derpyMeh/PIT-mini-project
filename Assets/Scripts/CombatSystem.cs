@@ -30,7 +30,7 @@ public class CombatSystem : MonoBehaviour
         playerScore = 0;
         baseHP = 100;
         playerAlive = true;
-        timeUntilSpawn = 0;
+        timeUntilSpawn = 1;
         StartCombat();
     }
 
@@ -52,6 +52,7 @@ public class CombatSystem : MonoBehaviour
     {
         Debug.Log("Combat Initiated...");
         combatInitiated = true;
+        StartCoroutine("SpawnAccelerator");
     }
 
     private void SetTimeUntilSpawn()
@@ -65,11 +66,12 @@ public class CombatSystem : MonoBehaviour
             {
                 for (int j = 0; j < enemySpawnPoints.Count; j++)
                 {
-                    Instantiate(enemyPrefab, enemySpawnPoints[j].transform.position, Quaternion.identity);
+                    GameObject spawnedEnemy = Instantiate(enemyPrefab, enemySpawnPoints[0].transform.position, Quaternion.identity);
                 }
             } 
             SetTimeUntilSpawn();
             waveCount += 1;
+
     }
 
     public void InitiateCombat()
@@ -118,6 +120,16 @@ public class CombatSystem : MonoBehaviour
         set
         {
             playerAlive = value;
+        }
+    }
+
+    IEnumerator SpawnAccelerator()
+    {
+        while(combatInitiated)
+        {
+            minimumWaveTime -= 0.5f;
+            maximumWaveTime -= 0.5f;
+            yield return new WaitForSeconds(5);
         }
     }
 }
