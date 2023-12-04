@@ -8,6 +8,8 @@ public class EnemyHealth : MonoBehaviour
     int currentHealth;
     bool isDead = false;
 
+    [SerializeField] Animator orcWarriorAnimator;
+
     void Awake()
     {
         currentHealth = enemyHealth;
@@ -22,8 +24,25 @@ public class EnemyHealth : MonoBehaviour
             {
                 currentHealth = 0;
                 isDead = true;
-                GetComponent<AIBehavior>().SelfDestruct(); // Trigger death behavior in AIBehavior script
+
+                // Stop all currently active animations
+                orcWarriorAnimator.SetBool("IsMoving", false);
+                orcWarriorAnimator.SetBool("IsAttacking", false);
+
+                // Trigger death animation
+                orcWarriorAnimator.SetBool("IsDead", true);
+
+                // Wait for the death animation to end (assuming it takes 3 seconds)
+                StartCoroutine(WaitAndDestroy(3f));
             }
         }
+    }
+
+    IEnumerator WaitAndDestroy(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        // Trigger self destruction after waiting
+        GetComponent<AIBehavior>().SelfDestruct();
     }
 }
