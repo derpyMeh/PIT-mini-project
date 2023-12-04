@@ -242,7 +242,7 @@ MonoBehaviour:
     m_Bits: 64
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 3
   waypoints:
   - {fileID: 6838498796530157461, guid: 508484882fa45d44ca4ebdf3b7027e2f, type: 3}
   damageAmount: 1

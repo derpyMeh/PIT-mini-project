@@ -28,6 +28,7 @@ public class PlayerHealth : MonoBehaviour
             combatSystem.PlayerAlive = false;
             Debug.Log("Player Died");
         }
+        Debug.Log($"Player Took Damage. Current HP: {playerHP}");
     }
 
 

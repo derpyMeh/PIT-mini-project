@@ -40,6 +40,7 @@ public class CombatSystem : MonoBehaviour
         {
             // Game Over
             combatInitiated = false;
+            Debug.Log("Player Died. Game Over!");
         }
         timeUntilSpawn -= Time.deltaTime;
         if (timeUntilSpawn <= 0 && combatInitiated)
@@ -127,8 +128,15 @@ public class CombatSystem : MonoBehaviour
     {
         while(combatInitiated)
         {
-            minimumWaveTime -= 0.5f;
-            maximumWaveTime -= 0.5f;
+            if(minimumWaveTime >= 1f)
+            {
+                minimumWaveTime -= 0.5f;
+            }
+            
+            if(maximumWaveTime >= 1.5f)
+            {
+                maximumWaveTime -= 0.5f;
+            }
             yield return new WaitForSeconds(5);
         }
     }
