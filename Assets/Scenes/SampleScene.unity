@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.67935973, g: 0.73288846, b: 0.8046861, a: 1}
+  m_IndirectSpecularColor: {r: 0.679325, g: 0.7328694, b: 0.80467784, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1860,6 +1860,7 @@ GameObject:
   - component: {fileID: 84905100}
   - component: {fileID: 84905099}
   - component: {fileID: 84905098}
+  - component: {fileID: 84905102}
   m_Layer: 0
   m_Name: ResetMenu
   m_TagString: Untagged
@@ -1952,6 +1953,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 6, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &84905102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84905097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932596b4c345f054b81155c53393749b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restartButton: {fileID: 1260377428}
+  quitButton: {fileID: 339028067}
 --- !u!43 &86296303
 Mesh:
   m_ObjectHideFlags: 0
@@ -15229,7 +15244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7824dac87b5de4408165f3061274c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destination: {fileID: 0}
 --- !u!54 &704417799
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36893,6 +36907,7 @@ MonoBehaviour:
   minimumWaveTime: 10
   maximumWaveTime: 20
   spawnMultiplier: 1
+  resetMenu: {fileID: 84905097}
 --- !u!4 &1412129249
 Transform:
   m_ObjectHideFlags: 0

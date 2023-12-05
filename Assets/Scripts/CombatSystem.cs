@@ -11,6 +11,8 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] float minimumWaveTime = 2;
     [SerializeField] float maximumWaveTime = 5;
     [SerializeField] int spawnMultiplier = 1;
+    [Header("UI Objects")]
+    [SerializeField] GameObject resetMenu;
 
     private float timeUntilSpawn;
     private int waveCount;
@@ -21,10 +23,12 @@ public class CombatSystem : MonoBehaviour
     private static bool playerAlive;
 
     private bool combatInitiated;
+    private bool menuActive;
 
     void Start()
     {
         combatInitiated = false;
+        menuActive = false;
         spawnMultiplier = 1;
         waveCount = 0;
         playerScore = 0;
@@ -46,6 +50,14 @@ public class CombatSystem : MonoBehaviour
         if (timeUntilSpawn <= 0 && combatInitiated)
         {
             SpawnEnemies();
+        }
+
+        if (!playerAlive && !menuActive)
+        {
+            // uipanelGameObject.SetActive(true);
+            menuActive = true;
+            resetMenu.SetActive(true);
+            Time.timeScale = 0f;
         }
     }
 
