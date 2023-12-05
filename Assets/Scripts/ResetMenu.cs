@@ -7,7 +7,7 @@ public class ResetMenu : MonoBehaviour
 {
     public Transform playerHead;
     public GameObject resetMenu;
-    public float distancefromHead = 1.5f;
+    public float distancefromHead = 1.8f;
     InputActionProperty showbutton;
 
     // Start is called before the first frame update
