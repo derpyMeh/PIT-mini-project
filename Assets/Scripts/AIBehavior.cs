@@ -54,6 +54,12 @@ public class AIBehavior : MonoBehaviour
         {
             Patrolling();
         }
+        Collider[] isPlayerInMelee = Physics.OverlapSphere(transform.position, 1f, playerMask);
+        if (isPlayerInMelee.Length > 0)
+        {
+            DamagePlayer();
+        }
+
     }
 
     void Chasing()
@@ -87,7 +93,7 @@ public class AIBehavior : MonoBehaviour
                 else
                 {
                     // Damage the player and self-destruct when in range
-                    DamagePlayer();
+                    //DamagePlayer();
                 }
             }
         }
